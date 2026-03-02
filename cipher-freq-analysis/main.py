@@ -5,7 +5,7 @@ def decode(ciphertext, mapping):
     decoded = ""
     for c in ciphertext:
         if c.isalpha():
-            decoded += mapping[c.lower()]
+            decoded += mapping[c.upper()]
         else:
             decoded += c
 
@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     # clean user input to alphabetic only
     ciphertext = input("Enter ciphertext:\n")
-    clean = "".join(c.lower() for c in ciphertext if c.isalpha())
+    clean = "".join(c.upper() for c in ciphertext if c.isalpha())
 
     # get letters ordered by freq
     count = Counter(clean).most_common()
@@ -26,23 +26,25 @@ if __name__ == "__main__":
     eng_freq = ['E','T','A','O','I','N','S','R','H','D','L','U','C','M','F','Y','W','G','P','B','V','K','X','Q','J','Z']
 
     # create mapping from ciphertext letters to English letters
-    mapping = {c.lower(): e.lower() for c, e in zip(freq, eng_freq)}
+    mapping = {c.upper(): e.upper() for c, e in zip(freq, eng_freq)}
     
     print(decode(ciphertext, mapping))
 
     # ask user to refine mapping if needed
     while True:
-        r_c = input("What character do you want to replace? (type 0 to stop)").lower().strip()[0]   
+        r_c = input("What character do you want to replace? (type 0 to stop)").upper().strip()[0]   
         if r_c == '0':
             break
              
-        r_c2 = input("what character do you want to replace it with? ").lower().strip()[0]
+        r_c2 = input("what character do you want to replace it with? ").upper().strip()[0]
 
         for k,v in mapping.items():
             if v == r_c2:
+                # this ensures that the mapping that gets replaced does not get lost
                 mapping[k] = mapping[r_c]
                 break
-
+        
+        # replaces the original mapping with the true mapping that the user just provided
         mapping[r_c] = r_c2
 
         print("\nOriginal ciphertext:")
