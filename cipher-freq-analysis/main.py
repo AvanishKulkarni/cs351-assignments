@@ -1,5 +1,10 @@
 from collections import Counter
-
+'''
+CS 351 Assignment 3
+Allen Cabrera
+Avanish Kulkarni
+Youssef Masoud
+'''
 def decode(ciphertext, mapping):
     # decode the ciphertext using the mapping
     decoded = ""
@@ -32,7 +37,7 @@ if __name__ == "__main__":
 
     # ask user to refine mapping if needed
     while True:
-        r_c = input("What character do you want to replace? (type 0 to stop)").upper().strip()[0]   
+        r_c = input("What character do you want to replace from the cipher? (type 0 to stop)").upper().strip()[0]   
         if r_c == '0':
             break
              
